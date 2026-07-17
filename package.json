@@ -1,0 +1,20 @@
+{
+  "name": "aigra-farm-api",
+  "version": "1.0.0",
+  "description": "RESTful API for farm land management — PT AIGRA EON INDONESIA",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itsfarid/aigra-farm-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/itsfarid/aigra-farm-api/issues"
+  },
+  "homepage": "https://github.com/itsfarid/aigra-farm-api#readme"
+}
