@@ -95,4 +95,15 @@ Query params: `skip` (default 0), `limit` (default 10, max 100), `location` (opt
 - SQLite used for simplicity; can be swapped to PostgreSQL/MySQL via Sequelize dialect config
 - Basic security consideration: no raw SQL used (Sequelize ORM prevents SQL injection by default)
 - Pagination and location filter implemented as bonus on GET /farms
-- DELETE endpoint implemented as bonus
+- DELETE endpoint 
+
+## Security Considerations
+
+Basic security measures implemented in this API:
+
+- **SQL Injection Prevention**: All database queries go through Sequelize ORM with parameterized queries; no raw SQL is used anywhere in the codebase.
+- **Input Validation**: Required fields (e.g. `name`) are validated on POST and PUT requests before hitting the database. Empty or non-string values are rejected with a 400 response.
+- **Security Headers**: `helmet` middleware is used to set standard HTTP security headers (Content-Security-Policy, X-Content-Type-Options, X-Frame-Options, HSTS, etc).
+- **Rate Limiting**: `express-rate-limit` caps each IP to 100 requests per 15-minute window, returning a 429 response when exceeded, to mitigate basic abuse/DoS attempts.
+- **Consistent Error Responses**: Errors never leak stack traces or internal implementation details to the client; only a code and a safe message are returned.
+- **Environment Variables**: Sensitive configuration (database path, port) is kept in `.env`, excluded from version control via `.gitignore`, with `.env.example` provided as a template.
