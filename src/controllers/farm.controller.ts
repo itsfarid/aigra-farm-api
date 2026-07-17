@@ -38,3 +38,31 @@ export async function createFarm(req: Request, res: Response, next: NextFunction
     next(err);
   }
 }
+
+export async function updateFarm(req: Request, res: Response, next: NextFunction) {
+  try {
+    const farm = await Farm.findByPk(req.params.id);
+    if (!farm) throw new ApiError(404, `Farm with id ${req.params.id} not found`);
+
+    const { name, location, area_hectare, crop_type } = req.body;
+    if (name !== undefined && (typeof name !== "string" || name.trim() === "")) {
+      throw new ApiError(400, "Field 'name' cannot be empty");
+    }
+
+    await farm.update({ name, location, area_hectare, crop_type });
+    res.status(200).json(farm);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function deleteFarm(req: Request, res: Response, next: NextFunction) {
+  try {
+    const farm = await Farm.findByPk(req.params.id);
+    if (!farm) throw new ApiError(404, `Farm with id ${req.params.id} not found`);
+    await farm.destroy();
+    res.status(200).json({ message: `Farm with id ${req.params.id} deleted successfully` });
+  } catch (err) {
+    next(err);
+  }
+}
