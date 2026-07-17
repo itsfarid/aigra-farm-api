@@ -33,7 +33,7 @@ Simple RESTful API to manage agricultural land (farm) data. Built with Node.js, 
 | GET    | /farms/:id  | Get a single farm by ID                         |
 | POST   | /farms      | Create a new farm                               |
 | PUT    | /farms/:id  | Update an existing farm                         |
-| DELETE | /farms/:id  | Delete a farm (bonus)                           |
+| DELETE | /farms/:id  | Delete a farm                         |
 
 ### GET /farms
 Query params: `skip` (default 0), `limit` (default 10, max 100), `location` (optional filter)
@@ -94,7 +94,7 @@ Query params: `skip` (default 0), `limit` (default 10, max 100), `location` (opt
 - Input validation on POST and PUT (`name` required and cannot be empty)
 - SQLite used for simplicity; can be swapped to PostgreSQL/MySQL via Sequelize dialect config
 - Basic security consideration: no raw SQL used (Sequelize ORM prevents SQL injection by default)
-- Pagination and location filter implemented as bonus on GET /farms
+- Pagination and location filter implemented on GET /farms
 - DELETE endpoint 
 
 ## Security Considerations
